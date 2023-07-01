@@ -1,4 +1,3 @@
-import { ParamsDictionary } from "express-serve-static-core";
 import connection from "../databse/databes";
 import { DeckCard } from "../protocols";
 
