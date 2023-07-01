@@ -5,5 +5,8 @@ const deckRouter = Router();
 
 deckRouter.get("/decks", deckController.listDeck);
 deckRouter.post("/decks", deckController.buildDeck);
+deckRouter.delete("/decks/:id", deckController.deleteCard);
+deckRouter.put("/decks/:id", deckController.updateCard);
+
 
 export default deckRouter;

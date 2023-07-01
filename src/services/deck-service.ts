@@ -5,6 +5,15 @@ export function buildDeck(card: DeckCard) {
     return deckRepository.buildDeck(card);
 }
 
-export function listDeck() {
-    return deckRepository.listDeck();
+export async function listDeck() {
+    const deckList = await deckRepository.listDeck();
+    return deckList.rows;
+}
+
+export function deleteCard(cardId: number) {
+    return deckRepository.deleteCard(cardId);
+}
+
+export function updateCard(cardId: number, card: DeckCard) {
+    return deckRepository.updateCard(cardId, card);
 }
