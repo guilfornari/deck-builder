@@ -1,7 +1,8 @@
+import { notFoundError } from "../errors/errors";
 import { DeckCard } from "../protocols";
 import * as deckRepository from "../repositories/deck-repository";
 
-export function buildDeck(card: DeckCard) {
+export async function buildDeck(card: DeckCard) {
     return deckRepository.buildDeck(card);
 }
 
@@ -10,10 +11,23 @@ export async function listDeck() {
     return deckList.rows;
 }
 
-export function deleteCard(cardId: number) {
+export async function deleteCard(cardId: number) {
+    const card = await deckRepository.getCard(cardId);
+    if (!card.rows[0]) throw notFoundError(`Card with id ${cardId}`);
     return deckRepository.deleteCard(cardId);
 }
 
-export function updateCard(cardId: number, card: DeckCard) {
+export async function updateCard(cardId: number, card: DeckCard) {
+    const result = await deckRepository.getCard(cardId);
+    console.log(!result.rows[0]);
+    if (!result.rows[0]) throw notFoundError(`Card with id ${cardId}`);
     return deckRepository.updateCard(cardId, card);
 }
+
+export async function getCard(cardId: number) {
+    const card = await deckRepository.getCard(cardId);
+    if (!card.rows[0]) throw notFoundError(`Card with id ${cardId}`);
+    return card.rows[0];
+}
+
+

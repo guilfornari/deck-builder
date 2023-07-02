@@ -30,3 +30,10 @@ export function updateCard(cardId: number, card: DeckCard) {
         WHERE id=$1`;
     return connection.query(query, [cardId, name, cardType, color, manaTotal, amount]);
 }
+
+export function getCard(cardId: number) {
+    let query: string = `
+        SELECT * FROM cards
+        WHERE cards.id = $1;`;
+    return connection.query(query, [cardId]);
+}
